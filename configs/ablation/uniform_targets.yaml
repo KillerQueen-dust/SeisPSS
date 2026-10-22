@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /pretrain/seispss
+  - override /mask: uniform
+  - _self_
+
+run:
+  name: seispss_uniform_targets

@@ -1,0 +1,52 @@
+# @package _global_
+defaults:
+- /pretrain/seispss
+- override /mask: waveform_onset
+- override /loss: waveform_reconstruction
+- _self_
+model:
+  objective: masked_reconstruction
+  reconstruction_normalize_target: none
+data:
+  dataset_names:
+  - InstanceCounts
+  - PNW
+  - GEOFON
+  batch_size: 512
+  val_batch_size: 192
+  num_workers: 20
+  window:
+    event:
+      random_probability: 0.1
+      phase_containing_probability: 0.9
+      pick_margin_sec:
+      - 8.0
+      - 35.0
+  batch_sampling:
+    earthquake_fraction: 1.0
+    noise_fraction: 0.0
+    event_pairing:
+      enabled: false
+      views_per_event: 4
+  dataset_sampling:
+    temperature: 0.25
+  anchor_cache:
+    enabled: true
+optim:
+  lr: 5.5e-05
+  backbone_lr_scale: 0.5
+  predictor_lr_scale: 1.0
+  min_lr_scale: 0.1
+  schedule:
+    total_steps: 60000
+    warmup_steps: 7000
+  ema:
+    ramp_steps: 60000
+trainer:
+  max_steps: 30000
+  val_check_interval: 2000
+checkpoint:
+  every_n_train_steps: 10000
+  export_variant: online
+run:
+  name: seispss_ablation_waveform_reconstruction

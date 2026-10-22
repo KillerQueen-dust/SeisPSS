@@ -1,0 +1,5 @@
+_target_: lightning.pytorch.loggers.CSVLogger
+save_dir: ${run.output_root}/${run.runs_subdir}/${run.run_id}
+name: learning_curves
+version: null
+flush_logs_every_n_steps: 50

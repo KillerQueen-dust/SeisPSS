@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - /finetune/stead
+  - override /model: transformer
+  - override /transfer: scratch
+  - _self_
+
+run:
+  name: transformer_scratch

@@ -1,0 +1,19 @@
+in_channels: 3
+stem_mode: conv
+stem_channels: [64, 128, 256]
+stem_kernel_sizes: [7, 7, 5]
+stem_strides: [2, 2, 2]
+objective: jepa # jepa | masked_reconstruction (objective-family ablation)
+reconstruction_normalize_target: none # none | per_patch (masked_reconstruction only)
+encoder_type: bimamba # bimamba | transformer (architecture ablation)
+encoder_depth: 8
+encoder_mlp_ratio: 4.0
+encoder_num_heads: 8 # transformer only
+mamba_d_state: 64
+mamba_d_conv: 4
+mamba_expand: 2
+predictor_dim: 192
+predictor_depth: 4
+predictor_num_heads: 6
+predictor_mlp_ratio: 4.0
+dropout: 0.05

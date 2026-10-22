@@ -1,0 +1,51 @@
+# Python and editor caches
+__pycache__/
+*.py[oc]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+build/
+dist/
+wheels/
+
+# Credentials and local settings
+.env
+.env.*
+*.pem
+*.key
+.netrc
+.codex/
+
+# Datasets, weights, and generated experiments
+/data/
+/datasets/
+/outputs/
+/checkpoints/
+/wandb/
+*.ckpt
+*.pt
+*.pth
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.log
+
+# Internal research materials and external baselines
+AGENTS.md
+AGENTS.override.md
+/baselines/
+/configs/baselines/
+/scripts/research/
+/tgrs_r1/
+/deliverables/
+/delivery/
+/archive/
+/paper/
+/ref_code/
+/code_review/

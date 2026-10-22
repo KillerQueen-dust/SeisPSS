@@ -1,0 +1,48 @@
+_target_: seispss.downstream.phase_picking.datamodule.PhasePickingDataModule
+dataset_name: STEAD
+sampling_rate: 100
+component_order: ZNE
+dimension_order: NCW
+batch_size: 192
+val_batch_size: 192
+num_workers: 24
+training_fraction: 1.0
+cache: null
+preload_train: true
+preload_eval: false
+prefetch_factor: 2
+amp_norm_type: std
+norm_eps: 1.0e-6
+require_phase: true
+pin_memory: true
+eval_split: dev
+window:
+  length_samples: 6000
+  train:
+    strategy: p_lead
+    min_p_lead_seconds: 5.0
+    max_p_lead_seconds: 25.0
+  eval:
+    strategy: full
+labels:
+  sigma_p: 12
+  sigma_s: 12
+
+# Train-only, label-preserving waveform augmentation (off by default => identical to
+# no-augment). Amplitude/gain scaling is intentionally absent (absorbed by per-channel
+# std-norm); these alter shape / SNR / channel presence / polarity, which survive it.
+augment:
+  enabled: false
+  add_noise:
+    prob: 0.5
+    snr_db: [5.0, 25.0]   # random target SNR (dB) added per channel
+    color: pink            # pink (~1/f) or white
+  polarity_flip:
+    prob: 0.5              # global 3C sign flip
+  time_mask:
+    prob: 0.3
+    max_frac: 0.10         # each masked segment up to 10% of the window
+    n_masks: [1, 2]
+    guard_seconds: 0.5     # keep this band around P/S picks unmasked
+  channel_dropout:
+    prob: 0.15             # zero one valid component (never the last)

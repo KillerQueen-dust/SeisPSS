@@ -1,0 +1,6 @@
+protocol: full_finetune
+init: pretrained
+backbone_export_path: outputs/checkpoints/seispss/backbone_ema_step090000.pt
+
+strict: true
+freeze_encoder_layers: 0

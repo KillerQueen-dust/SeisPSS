@@ -1,0 +1,29 @@
+# Architecture-ablation encoder: parameter-matched bidirectional Transformer.
+#
+# Everything outside the encoder (conv stem, sincos positions, mask token, cross-attention
+# predictor, EMA teacher, dense picking head) is identical to seispss_base, so the
+# contrast isolates the token mixer.
+#
+# Parameter match (encoder only, GPU path -- the Bi-Mamba CPU-fallback FFNs are dead weight
+# and are excluded): Bi-Mamba 8 x (fwd Mamba2 + bwd Mamba2 + fuse + FFN) = 12.17M.
+# Transformer 16 x (self-attention + FFN) = 12.64M (+3.8%), i.e. the ablation baseline is
+# given slightly MORE capacity, never less. Self-attention is bidirectional by construction,
+# so one block replaces a forward/backward scan pair; matching parameters therefore requires
+# twice the depth.
+in_channels: 3
+stem_mode: conv
+stem_channels: [64, 128, 256]
+stem_kernel_sizes: [7, 7, 5]
+stem_strides: [2, 2, 2]
+encoder_type: transformer
+encoder_depth: 16
+encoder_mlp_ratio: 4.0
+encoder_num_heads: 8
+mamba_d_state: 64 # unused (kept so summary writers reading these keys stay valid)
+mamba_d_conv: 4
+mamba_expand: 2
+predictor_dim: 192
+predictor_depth: 4
+predictor_num_heads: 6
+predictor_mlp_ratio: 4.0
+dropout: 0.05

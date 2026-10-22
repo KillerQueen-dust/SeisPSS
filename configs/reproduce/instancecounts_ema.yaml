@@ -1,0 +1,32 @@
+# @package _global_
+defaults:
+  - /finetune/instance
+  - _self_
+
+seed: 42
+run:
+  name: r1_instancecounts_ema_seed${seed}
+data:
+  training_fraction: 1.0
+  train_subset_manifest: protocols/r1/subsets/instancecounts/train_1pct_seed${seed}.csv.gz
+  loader_seed: ${seed}
+  num_workers: 12
+  cache: full
+  preload_train: true
+  preload_eval: false
+  batch_size: 192
+  val_batch_size: 192
+trainer:
+  max_steps: 40000
+  val_check_interval: 2000
+  num_sanity_val_steps: 0
+optim:
+  backbone_lr: 3e-05
+  head_lr: 0.0003
+  schedule:
+    total_steps: 40000
+    warmup_steps: 4000
+transfer:
+  init: pretrained
+eval:
+  final_test_after_fit: false

@@ -1,0 +1,74 @@
+{
+  "stead": {
+    "dataset_name": "STEAD",
+    "source_metadata_sha256": "c181ac271e482c8ed9ca29e7a370cabaa3a03164b68fed5a4dadee5080c9958a",
+    "sampling": {
+      "unit": "trace_name prefix before $",
+      "order": "first appearance in native train split",
+      "algorithm": "numpy.random.RandomState(subset_seed).shuffle; floor(fraction*n_blocks)",
+      "fraction_blocks": 0.01,
+      "seeds": [
+        42,
+        3407,
+        114514
+      ],
+      "selection_before_filter": true
+    },
+    "subsets": {
+      "42": {
+        "file": "subsets/stead/train_1pct_seed42.csv.gz",
+        "n_traces": 8192,
+        "sha256": "7fd4af49efb4de496af013f626f827ebad85161077a6e69742c60b19727cc8ec",
+        "trace_names_sha256": "75a905a0f2b6593e007894e15dd74b95f403e0881461aca9de4d01c775017490"
+      },
+      "3407": {
+        "file": "subsets/stead/train_1pct_seed3407.csv.gz",
+        "n_traces": 8192,
+        "sha256": "c03c48481a75740b53ad5bc3a174bedd81974c2bf04c0aa30be62607dbdb6316",
+        "trace_names_sha256": "c46be24ad3bfc3c21517fb7df0db33b1d461957671857c42399f32727560ee17"
+      },
+      "114514": {
+        "file": "subsets/stead/train_1pct_seed114514.csv.gz",
+        "n_traces": 9216,
+        "sha256": "50d95469892b161e98526650bba3fc9d4ec40c7dc931608b2feeaa295ee1796e",
+        "trace_names_sha256": "7a8519880ce9552c431d9224313cb243dd20a94a658409d5c8981f3ccb1bacf3"
+      }
+    }
+  },
+  "instancecounts": {
+    "dataset_name": "InstanceCounts",
+    "source_metadata_sha256": "6883db3c420862f84363da2a2cd5cf8eb30719fb7d3e8dc54050e6cbcabb19e3",
+    "sampling": {
+      "unit": "trace_name prefix before $",
+      "order": "first appearance in native train split",
+      "algorithm": "numpy.random.RandomState(subset_seed).shuffle; floor(fraction*n_blocks)",
+      "fraction_blocks": 0.01,
+      "seeds": [
+        42,
+        3407,
+        114514
+      ],
+      "selection_before_filter": true
+    },
+    "subsets": {
+      "42": {
+        "file": "subsets/instancecounts/train_1pct_seed42.csv.gz",
+        "n_traces": 6999,
+        "sha256": "b1be93f9e78ec0f9e84f435a0583ff6910e83e992b1adf32131ee03ad517b51b",
+        "trace_names_sha256": "945588c143b990fe8f654414180f60290f1d506283efdb46ed0720a7ac217f6a"
+      },
+      "3407": {
+        "file": "subsets/instancecounts/train_1pct_seed3407.csv.gz",
+        "n_traces": 6999,
+        "sha256": "cb061a96b33635a4e7c93bc569e37d0ca9ec1445e2e895356de7b29eb5b2438e",
+        "trace_names_sha256": "17d6344f2635844099b79e7d423a8fc451068eb0c2eb52c3113277d4b8bedd0d"
+      },
+      "114514": {
+        "file": "subsets/instancecounts/train_1pct_seed114514.csv.gz",
+        "n_traces": 6999,
+        "sha256": "c398e8f6ffab5e0752ea62c0a0e4b9cac3549c325995de6cc6f1213a805b64c5",
+        "trace_names_sha256": "bb38c3f1151d317043af40e211dbb28b363225825986dba4dcaa5e254da86386"
+      }
+    }
+  }
+}

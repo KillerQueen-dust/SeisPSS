@@ -1,0 +1,44 @@
+# @package _global_
+defaults:
+  - /data: phase_picking
+  - /optim: phase_picking
+  - /trainer: phase_picking
+  - /logger: csv
+  - /eval: phase_picking
+  - _self_
+  - optional /debug: null
+
+mode: train_phase_picking
+seed: 42
+
+run:
+  output_root: outputs
+  runs_subdir: phase_picking
+  run_id: null
+  name: null
+
+resume:
+  mode: none # options: none, path, last
+  ckpt_path: null
+  run_id: null
+  run_dir: null
+  reuse_run_dir: true
+  restore_wandb: true
+
+checkpoint:
+  monitor: val/f1
+  mode: max
+  save_top_k: 1
+  save_last: true
+  save_weights_only: false
+  save_on_exception: true
+  every_n_train_steps: 0
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${run.output_root}/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${run.output_root}/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

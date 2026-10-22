@@ -1,0 +1,24 @@
+type: pseudo_arrival
+sample_on_cpu: true
+context_mode: full_visible_complement
+
+target_lengths_tokens: [32, 64, 128]
+guard_ratios: [0.5, 0.25, 0.125]
+stem_guard_tokens: 5
+min_visible_ratio: 0.55
+max_resample_attempts: 32
+
+alpha_max: 0.65
+anchor_jitter_fraction: 0.015
+anchor_mode: shuffled
+
+horizons:
+  onset:
+    center_scale: sequence
+    center_range: [-0.015, 0.035]
+  transition:
+    center_scale: post_anchor
+    center_range: [0.10, 0.32]
+  late:
+    center_scale: post_anchor
+    center_range: [0.35, 0.80]

@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - /finetune/base
+  - /model: seispss_base
+  - /head: conv_picking
+  - /transfer: full_finetune
+  - /phase_model: seispss
+  - _self_
+
+run:
+  name: seispss_phase_picking
+trainer:
+  max_steps: 35000

@@ -1,0 +1,7 @@
+regression_type: smooth_l1
+smooth_l1_beta: 1.0
+regression_weight: 1.0
+cosine_weight: 0.25
+variance_weight: 0.05
+prediction_min_std: 0.6
+target_reduction: token_mean

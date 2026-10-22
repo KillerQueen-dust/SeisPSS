@@ -1,0 +1,10 @@
+_target_: lightning.pytorch.loggers.WandbLogger
+project: seispss-finetune
+save_dir: null
+name: null
+id: null
+save_code: true
+offline: false
+log_model: false
+settings:
+  console: "off"

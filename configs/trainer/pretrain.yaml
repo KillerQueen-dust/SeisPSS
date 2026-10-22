@@ -1,0 +1,20 @@
+accelerator: gpu
+devices: 1
+strategy: auto
+precision: bf16-mixed
+max_steps: 50000
+log_every_n_steps: 50
+accumulate_grad_batches: 1
+gradient_clip_val: 1.0
+default_root_dir: null
+deterministic: false
+benchmark: true
+val_check_interval: 1000
+check_val_every_n_epoch: null
+num_sanity_val_steps: 1
+matmul_precision: high
+limit_train_batches: null
+limit_val_batches: null
+callbacks:
+  - _target_: lightning.pytorch.callbacks.LearningRateMonitor
+    logging_interval: step

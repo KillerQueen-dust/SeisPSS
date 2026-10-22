@@ -1,0 +1,15 @@
+lr: 3.0e-5
+backbone_lr_scale: 0.25
+predictor_lr_scale: 1.0
+min_lr_scale: 0.02
+weight_decay: 0.003
+betas: [0.9, 0.95]
+eps: 1.0e-8
+warmup_ratio: 0.10
+schedule:
+  total_steps: 50000
+  warmup_steps: 5000
+ema:
+  start: 0.99
+  end: 0.999
+  ramp_steps: 50000

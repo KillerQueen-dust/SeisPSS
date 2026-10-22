@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /pretrain/seispss
+  - override /mask: shuffled
+  - _self_
+
+run:
+  name: seispss_misaligned_targets

@@ -1,0 +1,4 @@
+# Default entry point: the submitted SeisPSS pretraining recipe.
+defaults:
+  - pretrain/seispss
+  - _self_

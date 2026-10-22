@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /finetune/stead
+  - override /transfer: scratch
+  - _self_
+
+run:
+  name: bimamba_scratch

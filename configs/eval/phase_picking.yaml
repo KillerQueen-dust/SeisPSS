@@ -1,0 +1,8 @@
+threshold_p: 0.4
+threshold_s: 0.5
+tolerance_samples: 20
+min_peak_distance_samples: 50
+max_inference_window_samples: 6000
+sliding_stride_samples: 1000
+sliding_aggregation: avg_probs
+final_test_after_fit: true

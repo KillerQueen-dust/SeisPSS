@@ -1,0 +1,5 @@
+protocol: scratch
+init: scratch
+backbone_export_path: null
+strict: true
+freeze_encoder_layers: 0

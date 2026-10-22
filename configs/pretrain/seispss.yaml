@@ -1,0 +1,100 @@
+# @package _global_
+defaults:
+- /data: pretrain
+- /model: seispss_base
+- /mask: waveform_onset
+- /loss: latent_prediction
+- /optim: pretrain
+- /trainer: pretrain
+- /logger: csv
+- _self_
+- optional /debug: null
+mode: train
+seed: 42
+logging:
+  pretrain:
+    log_loss_terms: true
+    representation_stats:
+      train: true
+      val: false
+    window_breakdown:
+      train: true
+      val: false
+    sample_type_breakdown:
+      train: true
+      val: false
+    dataset_breakdown:
+      train: true
+      val: false
+    dataset_stats:
+      train: false
+      val: false
+    diagnostics_prefix: diagnostics/pretrain
+run:
+  output_root: outputs
+  runs_subdir: runs
+  run_id: null
+  name: seispss_pretrain
+resume:
+  mode: none
+  ckpt_path: null
+  run_id: null
+  run_dir: null
+  reuse_run_dir: true
+  restore_wandb: true
+checkpoint:
+  monitor: val/avg_loss
+  mode: min
+  save_top_k: 1
+  save_last: true
+  save_weights_only: false
+  save_on_exception: true
+  every_n_train_steps: 10000
+  auto_export_backbone: true
+  export_variant: ema
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${run.output_root}/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${run.output_root}/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+data:
+  dataset_names:
+  - InstanceCounts
+  - PNW
+  - GEOFON
+  batch_size: 512
+  val_batch_size: 192
+  window:
+    event:
+      random_probability: 0.1
+      phase_containing_probability: 0.9
+      pick_margin_sec:
+      - 8.0
+      - 35.0
+  batch_sampling:
+    earthquake_fraction: 1.0
+    noise_fraction: 0.0
+    event_pairing:
+      enabled: false
+  dataset_sampling:
+    temperature: 0.25
+  anchor_cache:
+    enabled: true
+loss:
+  target_reduction: horizon_balanced
+optim:
+  lr: 5.5e-05
+  backbone_lr_scale: 0.5
+  predictor_lr_scale: 1.0
+  min_lr_scale: 0.1
+  schedule:
+    total_steps: 90000
+    warmup_steps: 7000
+  ema:
+    ramp_steps: 60000
+trainer:
+  max_steps: 90000
+  val_check_interval: 2000

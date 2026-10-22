@@ -1,0 +1,13 @@
+backbone_lr: 3.0e-5
+head_lr: 3.0e-4
+model_lr: 3.0e-4
+min_lr_scale: 0.1
+weight_decay: 1.0e-2
+betas: [0.9, 0.95]
+eps: 1.0e-8
+warmup_ratio: 0.10
+schedule:
+  total_steps: null
+  warmup_steps: null
+loss:
+  class_weights: [2.0, 2.0, 1.0]

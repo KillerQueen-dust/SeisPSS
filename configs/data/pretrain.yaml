@@ -1,0 +1,59 @@
+_target_: seispss.data.datamodule.SeisPSSPretrainDataModule
+dataset_names:
+  - InstanceCounts
+  - PNW
+  - GEOFON
+sampling_rate: 100
+component_order: ZNE
+dimension_order: NCW
+batch_size: 192
+val_batch_size: 192
+num_workers: 8
+training_fraction: 1.0
+cache: null
+prefetch_factor: 2
+amp_norm_type: std
+norm_eps: 1.0e-6
+pin_memory: true
+anchor_cache:
+  enabled: false
+  root: outputs/cache/pseudo_arrival
+  force_rebuild: false
+  splits: [train, dev]
+  log_every_n: 1000
+  lock_poll_sec: 10.0
+  estimator:
+    name: robust_energy_onset_v1
+    version: 1
+    clip_k: 8.0
+    short_windows_sec: [0.2, 0.5]
+    long_window_sec: 5.0
+    long_window_max_fraction: 0.15
+    theta_on: 2.75
+    theta_hold: 1.25
+    persistence_sec: 0.20
+    persistence_fraction: 0.60
+    confidence_lo: 2.75
+    confidence_hi: 6.0
+    confidence_peak_window_sec: 2.0
+    eps: 1.0e-6
+window:
+  length_samples: 6000
+  event:
+    random_probability: 0.2
+    phase_containing_probability: 0.8
+    pick_margin_sec: [5.0, 55.0]
+  validation:
+    deterministic_manifest: true
+    p_position_samples: 1000
+    s_position_samples: 2000
+batch_sampling:
+  earthquake_fraction: 1.0
+  noise_fraction: 0.0
+  noise_dataset: STEAD
+  event_pairing:
+    enabled: false
+    views_per_event: 2
+dataset_sampling:
+  temperature: 0.25
+  num_samples_per_epoch: 0
